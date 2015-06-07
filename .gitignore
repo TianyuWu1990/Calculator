@@ -1,0 +1,566 @@
+package com.cal;
+
+
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class Calculate extends JFrame {
+
+	private JTextField textField;
+	/**
+	 * Launch the application
+	 * @param args
+	 */
+
+	public static void main(String args[]) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Calculate frame = new Calculate();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+
+
+public class Number {
+	double data;
+	Number link;
+
+}
+
+
+public class NumStack {
+	public Number first = null;
+	public Number last = null;
+	
+	public boolean IsEmpty(){
+		boolean value = false;
+		if(first == null)
+			value = true;
+			
+		return value;
+	}
+	public double pop() throws Exception{
+		if(first == null)
+			throw new Exception("Exception: error");
+		else 
+			{
+			Number p = first;
+			first = first.link;
+			return p.data;
+			}
+			
+	}
+	public void  push(double num) throws Exception{
+		
+			Number p = new Number();
+			p.data = num;
+			p.link = first;
+			first = p;
+		
+	}	
+}
+
+
+
+public class Symbol {
+	char data;
+	Symbol link;
+}
+
+
+
+
+
+public class SymbolStack {
+	public Symbol first = null;
+	public Symbol last = null;
+	
+	public boolean IsEmpty(){
+		boolean value = false;
+		if(first == null)
+			value = true;
+			
+		return value;
+	}
+	public char pop() throws Exception{
+		if(first == null)
+			throw new Exception("Exception: No symbols");
+		else 
+			{
+			Symbol p = first;
+			first = first.link;
+			return p.data;
+			}
+			
+	}
+	public void  push(char symbol) throws Exception{
+		
+			Symbol p = new Symbol();
+			p.data = symbol;
+			
+			p.link = first;
+			first = p;
+		
+	}
+	public char top()throws Exception{
+		return first.data ;
+	}
+	
+	
+}
+
+
+	public Calculate() {//Ö÷½çÃæ
+		super();
+		getContentPane().setLayout(null);
+		setFont(new Font("@Adobe ¿¬Ìå Std R", Font.BOLD, 16));
+		setBackground(Color.CYAN);
+		setTitle("¼ÆËãÆ÷");
+		setName("¼ÆËãÆ÷");
+		setBounds(100, 100, 437, 318);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		textField = new JTextField();
+		textField.setBounds(10, 10, 403, 42);
+		textField.setText(" ");
+		getContentPane().add(textField);
+
+		final JButton button = new JButton();
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();//ÊÇ·ñÖØÐÂÊäÈë
+				textField.setText(textField.getText()+"0");	//ÏÔÊ¾µ±Ç°ÊäÈëµÄ±í´ïÊ½
+			}
+		});
+		button.setText("0");
+		button.setBounds(10, 227, 76, 47);
+		getContentPane().add(button);
+
+		final JButton button_1 = new JButton();
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"1");
+			}
+		});
+		button_1.setText("1");
+		button_1.setBounds(10, 79, 76, 42);
+		getContentPane().add(button_1);
+
+		final JButton button_2 = new JButton();
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"2");
+			}
+		});
+		button_2.setText("2");
+		button_2.setBounds(92, 79, 76, 42);
+		getContentPane().add(button_2);
+
+		final JButton button_3 = new JButton();
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"3");
+			}
+		});
+		button_3.setText("3");
+		button_3.setBounds(174, 79, 76, 42);
+		getContentPane().add(button_3);
+
+		final JButton button_4 = new JButton();
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"4");
+			}
+		});
+		button_4.setText("4");
+		button_4.setBounds(10, 127, 76, 44);
+		getContentPane().add(button_4);
+
+		final JButton button_5 = new JButton();
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"5");
+			}
+		});
+		button_5.setText("5");
+		button_5.setBounds(92, 127, 76, 44);
+		getContentPane().add(button_5);
+
+		final JButton button_6 = new JButton();
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"6");
+			}
+		});
+		button_6.setText("6");
+		button_6.setBounds(174, 127, 76, 44);
+		getContentPane().add(button_6);
+
+		final JButton button_7 = new JButton();
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"7");
+			}
+		});
+		button_7.setText("7");
+		button_7.setBounds(10, 177, 76, 44);
+		getContentPane().add(button_7);
+
+		final JButton button_8 = new JButton();
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"8");
+			}
+		});
+		button_8.setText("8");
+		button_8.setBounds(92, 177, 76, 44);
+		getContentPane().add(button_8);
+
+		final JButton button_9 = new JButton();
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {fuwei();
+				textField.setText(textField.getText()+"9");
+			}
+		});
+		button_9.setText("9");
+		button_9.setBounds(174, 177, 76, 44);
+		getContentPane().add(button_9);
+
+		final JButton button_10 = new JButton();
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+".");
+			}
+		});
+		button_10.setFont(new Font("", Font.BOLD, 18));
+		button_10.setText(".");
+		button_10.setBounds(92, 227, 76, 47);
+		getContentPane().add(button_10);
+
+		final JButton button_11 = new JButton();
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				String str=textField.getText();
+				Calculator an=new Calculator();
+				Double jieguo=null;
+				try {
+					jieguo = an.calculate(str);//½øÐÐÔËËã
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					textField.setText(":ÊäÈëÓÐÎó£¬ÇëÖØÐÂÊäÈë");
+				}
+				String st=jieguo.toString();
+				textField.setText(":"+st);//ÏÔÊ¾½á¹û
+			}
+		});
+		button_11.setFont(new Font("", Font.BOLD, 16));
+		button_11.setText("=");
+		button_11.setBounds(174, 227, 76, 47);
+		getContentPane().add(button_11);
+
+		final JButton button_12 = new JButton();
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"+");
+			}
+		});
+		button_12.setFont(new Font("", Font.BOLD, 16));
+		button_12.setText("+");
+		button_12.setBounds(256, 79, 76, 42);
+		getContentPane().add(button_12);
+
+		final JButton button_13 = new JButton();
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"-");
+			}
+		});
+		button_13.setFont(new Font("", Font.BOLD, 16));
+		button_13.setText("-");
+		button_13.setBounds(256, 127, 76, 44);
+		getContentPane().add(button_13);
+
+		final JButton button_14 = new JButton();
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"*");
+			}
+		});
+		button_14.setFont(new Font("", Font.BOLD, 16));
+		button_14.setText("*");
+		button_14.setBounds(256, 177, 76, 44);
+		getContentPane().add(button_14);
+
+		final JButton button_15 = new JButton();
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"/");
+			}
+		});
+		button_15.setFont(new Font("", Font.BOLD, 16));
+		button_15.setText("/");
+		button_15.setBounds(256, 227, 76, 47);
+		getContentPane().add(button_15);
+
+		final JButton button_16 = new JButton();
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+"(");
+			}
+		});
+		button_16.setText("(");
+		button_16.setBounds(338, 79, 75, 42);
+		getContentPane().add(button_16);
+
+		final JButton button_17 = new JButton();
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();
+				textField.setText(textField.getText()+")");
+			}
+		});
+		button_17.setText(")");
+		button_17.setBounds(337, 127, 76, 44);
+		getContentPane().add(button_17);
+
+		final JButton button_18 = new JButton();
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				fuwei();		
+			String as=textField.getText();
+			int len=as.length();
+			if(as.charAt(len-1)==' ')
+				{textField.setText(" ");}
+			else textField.setText(as.substring(0, len-1));//Çå³ý×îºóÒ»¸ö×Ö·û
+			}
+		});
+		button_18.setFont(new Font("", Font.BOLD, 16));
+		button_18.setText("Çå³ý");
+		button_18.setBounds(337, 177, 76, 44);
+		getContentPane().add(button_18);
+
+		final JButton button_19 = new JButton();
+		button_19.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent arg0) {
+				textField.setText(" ");//¸´Î»²¢½«µÚÒ»¸ö×Ö·ûÉèÎª¿Õ¸ñ
+			}
+		});
+		button_19.setFont(new Font("", Font.BOLD, 16));
+		button_19.setText("¸´Î»");
+		button_19.setBounds(338, 227, 76, 47);
+		getContentPane().add(button_19);
+		//
+	}
+	
+    public void fuwei(){//ÊÇ·ñÖØÐÂÊäÈë
+    	String strl=textField.getText();
+    	if(strl.charAt(0)==':')
+    		{textField.setText(" ");}
+    	else textField.setText(strl);
+    }
+
+
+	public class Calculator //Ö÷·½·¨
+	{
+		NumStack  N= new NumStack();//´æ·ÅÊý×Ö
+		SymbolStack  S= new SymbolStack();//´æ·Å·ûºÅ
+		char num,operator;
+		public Double calculate(String str)throws Exception
+		{
+			double ans;//½á¹û
+			int len = str.length();
+			int k=1;//×Ö·ûË÷Òý£¬ÓÉÓÚµÚÒ»¸ö×Ö·ûÊÇ¿Õ¸ñ£¬ËùÒÔ´ÓµÚ¶þ¸öÎ»ÖÃ¿ªÊ¼
+			char next;
+			String strtemp = str+"#";
+			S.push('#');//½áÊø±êÖ¾
+			while(k<=len&&(!S.IsEmpty()))
+			{
+				char temp = strtemp.charAt(k);//Î»ÖÃk´¦µÄ×Ö·û
+				if(temp!=' ')
+				{
+					if(temp=='(')
+					{//Èç¹ûÊÇ¡°£¨¡±Ö±½ÓÑ¹Èë·ûºÅÕ»
+						S.push(temp);
+						k++;
+						continue;
+					}
+					if(temp==')')
+					{//Èç¹ûÊÇ¡°£©¡±ÔòÖ´ÐÐµ¯Õ»
+						while((next=S.pop())!= '(')
+						{	
+							N.push(cal(next));//¼ÆËã²¢½«½á¹ûÑ¹ÈëÊý×ÖÕ»
+						}
+						k++;
+						continue;
+					}
+					if(temp=='1'||temp=='2'||temp=='3'||temp=='4'||temp=='5'||
+							temp=='6'||temp=='7'||temp=='8'||temp=='9'||
+							temp=='0'||temp=='.')
+					{//½«±í´ïÊ½ÖÐµÄÊý×ÖÈ¡³ö
+						try
+						{
+							String s;
+							int kk=k;
+							for(;isNum(strtemp.charAt(k));k++);
+							s=strtemp.substring(kk, k);
+							double nu = Double.parseDouble(s);
+							N.push(nu);
+							continue;
+						}
+						catch(Exception e)
+						{
+							System.out.println("error");
+						}
+					}
+					if(temp=='+'||temp=='-'||temp=='*'||temp=='/'||temp=='#')
+					{
+						if((k==1)&&(temp=='+'||temp=='-'))//µÚ¶þ¸öÎ»ÖÃÈç¹ûÃ»ÓÐÊý×Ö£¬Ä¬ÈÏÎª0
+						{
+							N.push(0.0);
+							S.push(temp);
+							k++;	
+							continue;
+						}
+						if(strtemp.charAt(k-1)=='('&&(temp=='+'||temp=='-')){//ÔÚ¡°£¨¡±ºóµÄ¡°+¡±¡¢¡°-¡±Ä¬ÈÏÎªÕý¸ººÅ
+							N.push(0.0);
+							S.push(temp);
+							k++;
+							continue;
+						}
+						if(prios(temp))
+						{	
+							S.push(temp);
+							k++;
+							continue;
+						}
+						if(!prios(temp))
+						{
+							while(!prios(temp))
+							{
+								if(S.top()!='#'){
+									N.push(cal(S.pop()));}
+								else 
+								{	
+								    char stemp;
+								    stemp = S.pop();
+								    break;
+								}
+							}
+							S.push(temp);
+							k++;
+							continue;
+						}
+					}
+				
+			}
+				else k++;
+			}
+			
+			ans = N.pop();
+			return ans;
+			
+		}
+		
+		private  boolean isNum(char num)
+		{
+			if(num=='1'||num=='2'||num=='3'||num=='4'||num=='5'||num=='6'||
+					num=='7'||num=='8'||num=='9'||num=='0'||num=='.')
+				return true;
+			return false ;
+		}
+		private int Prio(char sym)
+		{
+			int prio;
+			switch(sym)
+			{
+				case '+' :
+					prio=1;
+					break;
+				case '-' :
+					prio=1;
+					break;
+				case '*' :
+					prio=2;
+					break;
+				case '/' :
+					prio=2;
+					break;
+				case '(' :
+					prio=0;
+					break;
+				case '#':
+					prio=-1;
+					break;
+				default:
+					prio=-2;
+				
+			}
+			return prio;
+		}
+		private double cal(char c)throws Exception
+		{
+			double ans1=0;
+			double b=N.pop();
+			double a=N.pop();
+			switch(c)
+			{
+			    case '+' :
+			    	ans1 = a+b;
+			    	break;
+			    case '-' : 
+			    	ans1 = a-b;
+			    	break;
+			    case '*' :
+			    	ans1 = a*b;
+			    	break;
+			    case '/' :
+			    	if(b==0)
+			    		throw new Exception(":±»³ýÊýÎªÁã");
+			    	ans1 = a/b;
+			    	break;
+		    	default :
+			    	throw new Exception(":ÊäÈëÓÐÎó");
+			
+		   	}
+			   
+				return ans1;
+	    }
+		private boolean prios(char chartemp)throws Exception//ÅÐ¶ÏÓÅÏÈ¼¶
+		{
+			boolean istrue;
+			if(Prio(chartemp)>Prio(S.top()))
+				istrue = true;
+			else
+				istrue = false;
+				return istrue;
+		}
+		
+	}
+	
+
+
+
+}
+
